@@ -1,0 +1,70 @@
+<section fxLayout="column wrap">
+
+  <div class="parent">
+
+    <div fxFlex>
+
+      <mat-card>
+
+
+        <div>
+          <button mat-raised-button color="primary" (click)="novo()">Novo</button>
+          <br>
+        </div>
+
+        <div>
+
+          <table mat-table [dataSource]="dsDepartamento" class="mat-elevation-z8">
+
+            <ng-container matColumnDef="descricao">
+              <th mat-header-cell *matHeaderCellDef> Descrição </th>
+              <td mat-cell *matCellDef="let row"> {{row.descricao}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="editar">
+              <th mat-header-cell *matHeaderCellDef width="50px"> Editar </th>
+              <td mat-cell *matCellDef="let row" width="50px">
+                <button id="editar" role="button" attribute="aria-label" mat-icon-button matTooltip="Editar"
+                  matTooltipClass="tootip-btn" aria-label="Editar">
+                  <mat-icon (click)="editar(row.id)">edit</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="excluir">
+              <th mat-header-cell *matHeaderCellDef width="50px"> Excluir </th>
+              <td mat-cell *matCellDef="let row" width="50px">
+                <button mat-icon-button>
+                  <mat-icon (click)="excluir(row.id)">delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          </table>
+
+          <!-- <table mat-table fxFlex [dataSource]="dsDepartamento" matSort class="mat-elevation-z8">
+
+            <ng-container matColumnDef="descricao">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</th>
+              <td mat-cell *matCellDef="let row">{{row.descricao}}</td>
+
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <th mat-row *matRowDef="let row; columns: displayedColumns"></th>
+
+          </table> -->
+
+        </div>
+
+
+      </mat-card>
+
+    </div>
+
+  </div>
+
+</section>
