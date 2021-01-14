@@ -1,0 +1,14 @@
+.botaoFechar{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0px 9px 8px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    line-height: 14px;
+    min-width: auto;
+}
+
+/* .mat-form-field {
+    margin-left: 8px;
+  } */

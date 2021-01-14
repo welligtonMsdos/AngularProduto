@@ -12,12 +12,21 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { DepartamentoModalComponent } from './cadastro/departamento/departamento-modal/departamento-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmacaoComponent } from './shared/components/confirmacao/confirmacao.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
     AppComponent,
     DepartamentoComponent,
-    ProdutoComponent,    
+    ProdutoComponent,
+    DepartamentoModalComponent,
+    ConfirmacaoComponent,    
   ],
   imports: [
     BrowserModule,
@@ -30,7 +39,19 @@ import { ToastrModule } from 'ngx-toastr';
     MatTableModule, 
     HttpClientModule,   
     ToastrModule.forRoot({ timeOut: 3000 }),
-    
+    MatDialogModule,
+    MatFormFieldModule,  
+    FormsModule,  
+    ReactiveFormsModule,
+    MatInputModule,
+    FlexLayoutModule
+  ],
+  exports: [
+    MatDialogModule,   
+  ],
+  entryComponents: [
+    DepartamentoModalComponent,
+    ConfirmacaoComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
