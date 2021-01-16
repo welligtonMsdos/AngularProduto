@@ -1,0 +1,53 @@
+<mat-card>
+  <mat-card-title>
+    <h2>Cadastro de Produtos</h2>
+    <button mat-button class="botaoFechar" (click)="fechar()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-title>
+
+  <mat-card-content>
+
+    <form [formGroup]="frmProduto">
+
+      <div fxLayout="column">
+
+        <div fxLayout="row" fxFlex fxLayoutGap="10px">
+
+          <mat-form-field fxFlex>
+            <mat-label>Departamento</mat-label>
+            <mat-select formControlName="departamentoId">
+              <mat-option *ngFor="let item of listaDepartamento" [value]="item">
+
+                {{item.descricao}}
+
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+
+        <div fxLayout="row" fxFlex fxLayoutGap="10px">
+
+          <mat-form-field fxFlex>
+            <mat-label>Descrição</mat-label>
+            <input matInput placeholder="Descrição" formControlName="descricao" required>
+          </mat-form-field>
+
+        </div>
+
+      </div>
+
+    </form>
+
+  </mat-card-content>
+
+  <mat-card-actions>
+
+    <div fxLayoutAlign="end start">
+      <button [disabled]="frmProduto.invalid" mat-raised-button color="primary" (click)="salvar()">Salvar</button>
+    </div>
+
+  </mat-card-actions>
+
+</mat-card>

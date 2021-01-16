@@ -13,12 +13,18 @@ import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { DepartamentoModalComponent } from './cadastro/departamento/departamento-modal/departamento-modal.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef  } from '@angular/material/dialog';
 import { ConfirmacaoComponent } from './shared/components/confirmacao/confirmacao.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MenuLeftComponent } from './core/menu-left/menu-left.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { DepartamentoTableModalComponent } from './shared/components/departamento-table-modal/departamento-table-modal.component';
+import { ProdutoModalComponent } from './cadastro/produto/produto-modal/produto-modal.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -26,7 +32,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     DepartamentoComponent,
     ProdutoComponent,
     DepartamentoModalComponent,
-    ConfirmacaoComponent,    
+    ConfirmacaoComponent,
+    MenuLeftComponent,
+    DepartamentoTableModalComponent,
+    ProdutoModalComponent,    
   ],
   imports: [
     BrowserModule,
@@ -44,14 +53,18 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FormsModule,  
     ReactiveFormsModule,
     MatInputModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatPaginatorModule,
+    MatMenuModule,  
+    MatSelectModule,   
   ],
   exports: [
-    MatDialogModule,   
+    MatDialogModule,    
   ],
   entryComponents: [
     DepartamentoModalComponent,
     ConfirmacaoComponent,
+    ProdutoModalComponent,    
   ],
   providers: [],
   bootstrap: [AppComponent]

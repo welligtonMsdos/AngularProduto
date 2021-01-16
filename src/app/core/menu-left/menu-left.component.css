@@ -1,0 +1,12 @@
+.mat-menu-root{
+    margin-left: -16px;
+}
+
+.mat-menu-root button.mat-menu-item{
+    border-bottom: 0.5px solid rgba(0,0,0,0.4) !important;
+    display: none;
+}
+
+.mat-menu-root button.mat-menu-item:hover:not([disabled]){
+    border-left: 2px solid;
+}

@@ -23,6 +23,10 @@ export class DepartamentoService extends BaseService {
         return this.http.post<ResponseVM>(`${this.ApiUrl}/Departamento`, model, this.httpOptions);
     }
 
+    public Put(model: DepartamentoModel) : Observable<ResponseVM>{
+        return this.http.put<ResponseVM>(`${this.ApiUrl}/Departamento`, model, this.httpOptions);
+    }
+
     public Delete(id: number): Observable<ResponseVM>{
         return this.http.delete<ResponseVM>(`${this.ApiUrl}/Departamento/${id}`, this.httpOptions);
     }

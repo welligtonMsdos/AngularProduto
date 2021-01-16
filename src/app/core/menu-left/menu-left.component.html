@@ -1,0 +1,38 @@
+<button (mouseover)="openMenu()" mat-icon-button [matMenuTriggerFor]="menu">
+
+  <mat-icon>menu</mat-icon>
+
+</button>
+
+<mat-menu #menu="matMenu">
+
+  <button mat-menu-item routerLink="/departamento">
+    <mat-icon color="primary">dashboard</mat-icon>
+    <span>Departamento</span>
+  </button>
+
+  <button mat-menu-item routerLink="/produto">
+    <mat-icon color="primary">list_alt</mat-icon>
+    <span>Produto</span>
+  </button>
+
+  <button mat-menu-item [matMenuTriggerFor]="geral">
+    <mat-icon color="primary">toc</mat-icon>
+    <span>Geral</span>
+  </button>
+
+</mat-menu>
+
+<mat-menu #geral="matMenu">
+
+  <button mat-menu-item routerLink="/departamento">
+    <mat-icon color="primary">dashboard</mat-icon>
+    <span>Departamento</span>
+  </button>
+
+  <button mat-menu-item routerLink="/produto">
+    <mat-icon color="primary">list_alt</mat-icon>
+    <span>Produto</span>
+  </button>
+
+</mat-menu>

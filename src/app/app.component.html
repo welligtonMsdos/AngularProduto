@@ -1,23 +1,20 @@
-<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center">
-
-  <button mat-icon-button>
-    <mat-icon>menu</mat-icon>
-  </button>
-
-  <span>
-    <mat-icon>home</mat-icon>
-  </span>
-  
-  <span class="spacer"></span> 
+<mat-toolbar color="primary">
 
   <div>
 
-    <button class="botoesToolBar" mat-raised-button color="primary" routerLink="/departamento">Departamento</button>
+    <app-menu-left></app-menu-left>
+
+  </div>
+
+  <span class="spacer"></span>
+
+  <div>
+
+    <button class="botoesToolBar" mat-raised-button color="primary" (click)="openDepartamento()">Departamento</button>
     <button class="botoesToolBar" mat-raised-button color="primary" routerLink="/produto">Produto</button>
 
   </div>
 
 </mat-toolbar>
-
 
 <router-outlet></router-outlet>

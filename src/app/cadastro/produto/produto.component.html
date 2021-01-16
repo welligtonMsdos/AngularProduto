@@ -1,1 +1,39 @@
-<p>produto works!</p>
+<section fxLayout="column wrap">
+
+    <div class="parent">
+  
+      <div fxFlex>
+  
+        <mat-card>        
+  
+          <div>
+            <button mat-raised-button color="primary" (click)="novo()">Novo</button>
+            <br>
+          </div>
+  
+          <div style="padding: 10px;">
+  
+            <form>
+  
+              <mat-form-field fxFlex>
+  
+                <mat-label>Pesquisa</mat-label>
+  
+                <input matInput (change)="changeFn($event)">
+  
+                <mat-icon color="primary" matSuffix>search</mat-icon>
+  
+              </mat-form-field>
+  
+            </form>
+  
+          </div>  
+          
+        </mat-card>
+  
+      </div>
+  
+    </div>
+  
+  </section>
+  

@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
 import { ConfirmacaoComponent } from 'src/app/shared/components/confirmacao/confirmacao.component';
@@ -12,7 +14,7 @@ import { DepartamentoService } from './departamento.service';
   templateUrl: './departamento.component.html',
   styleUrls: ['./departamento.component.css']
 })
-export class DepartamentoComponent implements OnInit {
+export class DepartamentoComponent implements OnInit { 
 
   departamentoModel = new DepartamentoModel();
   dados: DepartamentoModel[] = [];
@@ -20,22 +22,26 @@ export class DepartamentoComponent implements OnInit {
 
   displayedColumns: string[] = ['descricao', 'editar', 'excluir'];
 
-  constructor(private departamentoService: DepartamentoService,
+  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort!: MatSort;
+
+  constructor(   
+    private departamentoService: DepartamentoService,
     private dg: MatDialog,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
-    this.GetAll();
+    this.dsDepartamento.paginator = this.paginator;
+    this.dsDepartamento.sort = this.sort;
 
+    this.GetAll();
   }
 
   GetAll() {
     this.departamentoService.GetAll().subscribe(res => {
 
       if (res.success) {
-        console.log(res);
-
         this.dados = res.data;
         this.dsDepartamento.data = this.dados;
       }
@@ -46,23 +52,44 @@ export class DepartamentoComponent implements OnInit {
   }
 
   editar(id: number) {
-    this.toastr.warning(id.toString());
+    this.departamentoModel = new DepartamentoModel();
+    this.departamentoModel = this.dados.filter(d => d.id == id)[0];
+
+    //console.log(this.departamentoModel);
+
+    this.dg.open(DepartamentoModalComponent, {
+      width: '50%',
+      height: "auto",
+      data: {
+        model: this.departamentoModel,
+      }
+
+    }).afterClosed().subscribe(res => {
+
+      if (res != undefined) {
+        let index = this.dados.findIndex(d => d.id == id);
+        this.dados[index] = res.data;
+        this.dsDepartamento.data = this.dados;
+        this.dsDepartamento._updateChangeSubscription();
+      }
+
+    });
   }
 
   excluir(id: number) {
-    this.dg.open(ConfirmacaoComponent,{
+    this.dg.open(ConfirmacaoComponent, {
       disableClose: true,
       width: '35%',
       height: "auto",
       data: 'Deseja realmente excluir?'
-    }).afterClosed().subscribe(res=>{
+    }).afterClosed().subscribe(res => {
 
-      if(res){
+      if (res) {
 
-        this.departamentoService.Delete(id).subscribe(res=>{
+        this.departamentoService.Delete(id).subscribe(res => {
 
-          if(res.success){
-            let index = this.dados.findIndex(d=>d.id == id);
+          if (res.success) {
+            let index = this.dados.findIndex(d => d.id == id);
             this.dados.splice(index, 1);
             this.dsDepartamento.data = this.dados;
             this.dados.push();
@@ -71,11 +98,11 @@ export class DepartamentoComponent implements OnInit {
             this.toastr.success('Excluido com sucesso');
           }
 
-        },err=>{
+        }, err => {
           this.toastr.error(err);
         });
 
-      } 
+      }
 
     });
   }
@@ -91,17 +118,19 @@ export class DepartamentoComponent implements OnInit {
         model: this.departamentoModel,
       }
 
-    }).afterClosed().subscribe(res=>{
+    }).afterClosed().subscribe(res => {
 
-      console.log(res);
-
-      this.dados.push(res.data);
-      this.dsDepartamento.data = this.dados;
-      this.dsDepartamento._updateChangeSubscription();
-
-      //console.log(res);
+      if (res != undefined) {
+        this.dados.push(res.data);
+        this.dsDepartamento.data = this.dados;
+        this.dsDepartamento._updateChangeSubscription();
+      }
 
     });
   }
 
+  changeFn(e: any) {
+    console.log(e.target.value);
+  }
+  
 }

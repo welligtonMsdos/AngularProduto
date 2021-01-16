@@ -1,11 +1,13 @@
-.parent{
-    justify-content: center;
-    align-items: left;
-    margin-top: 3%;
-    margin-left: 15%;
-    margin-right: 15%;
+.parent {
+  justify-content: center;
+  align-items: left;
+  margin-top: 3%;
+  margin-left: 15%;
+  margin-right: 15%;
 }
 
 table {
-    width: 100%;
-  }
+  width: 100%;
+}
+
+
