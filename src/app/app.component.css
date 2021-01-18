@@ -5,3 +5,10 @@
   .botoesToolBar{
     margin: 0 15px;
 }
+
+.parent {
+  /* justify-content: center;
+  align-items: left;   */
+  margin-left: 15%;
+  margin-right: 15%;
+}

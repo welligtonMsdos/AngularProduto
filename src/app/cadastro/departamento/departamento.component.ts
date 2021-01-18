@@ -1,5 +1,5 @@
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -23,7 +23,7 @@ export class DepartamentoComponent implements OnInit {
   displayedColumns: string[] = ['descricao', 'editar', 'excluir'];
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort!: MatSort;
+  @ViewChild(MatSort, { static: true }) sort!: MatSort; 
 
   constructor(   
     private departamentoService: DepartamentoService,
@@ -36,6 +36,14 @@ export class DepartamentoComponent implements OnInit {
     this.dsDepartamento.sort = this.sort;
 
     this.GetAll();
+  }  
+
+  applyFilter(filterValue: string){
+    this.dsDepartamento.filter = filterValue.trim().toLocaleLowerCase();
+
+    if(this.dsDepartamento.paginator){
+      this.dsDepartamento.paginator.firstPage();
+    }
   }
 
   GetAll() {
@@ -53,9 +61,7 @@ export class DepartamentoComponent implements OnInit {
 
   editar(id: number) {
     this.departamentoModel = new DepartamentoModel();
-    this.departamentoModel = this.dados.filter(d => d.id == id)[0];
-
-    //console.log(this.departamentoModel);
+    this.departamentoModel = this.dados.filter(d => d.id == id)[0];    
 
     this.dg.open(DepartamentoModalComponent, {
       width: '50%',
@@ -127,10 +133,6 @@ export class DepartamentoComponent implements OnInit {
       }
 
     });
-  }
-
-  changeFn(e: any) {
-    console.log(e.target.value);
   }
   
 }

@@ -16,8 +16,11 @@
 
           <mat-form-field fxFlex>
             <mat-label>Descrição</mat-label>
-            <input matInput placeholder="Descrição" formControlName="descricao" required>                       
-          </mat-form-field>
+            <input matInput placeholder="Descrição" formControlName="descricao" required>  
+            <mat-error *ngIf="frmDepartamento.controls['descricao'].hasError('required')">Descrição is required</mat-error>
+            <mat-error *ngIf="frmDepartamento.controls['descricao'].hasError('minlength')">Descrição should be more than 3 characters</mat-error>
+            <mat-error *ngIf="frmDepartamento.controls['descricao'].hasError('maxlength')">Descrição should be less than 15 characters</mat-error> 
+          </mat-form-field>         
 
         </div>
        

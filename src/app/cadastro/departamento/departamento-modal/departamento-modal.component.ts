@@ -36,11 +36,14 @@ export class DepartamentoModalComponent implements OnInit {
 
     this.frmDepartamento = this.fb.group({
 
-      descricao: this.fb.control(this.data.model.descricao, [Validators.required]),      
+      descricao: this.fb.control(this.data.model.descricao, 
+                  [Validators.required,
+                   Validators.minLength(3),
+                   Validators.maxLength(15)]),      
 
     });    
 
-  } 
+  }  
 
   salvar() {
 
@@ -49,9 +52,14 @@ export class DepartamentoModalComponent implements OnInit {
     if (this.data.model.id > 0) {
 
       this.departamentoService.Put(this.data.model).subscribe(res => {
+        
+        console.log(res);
+
         if (res.success) {
           this.toastr.success('Salvo com sucesso.');
           this.dialogRef.close(res);
+        } else{
+          this.toastr.error(res.data);
         }
       }, err => {
         this.toastr.error(err);
