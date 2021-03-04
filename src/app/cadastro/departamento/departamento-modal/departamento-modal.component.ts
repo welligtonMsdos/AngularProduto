@@ -53,8 +53,6 @@ export class DepartamentoModalComponent implements OnInit {
 
       this.departamentoService.Put(this.data.model).subscribe(res => {
         
-        console.log(res);
-
         if (res.success) {
           this.toastr.success('Salvo com sucesso.');
           this.dialogRef.close(res);

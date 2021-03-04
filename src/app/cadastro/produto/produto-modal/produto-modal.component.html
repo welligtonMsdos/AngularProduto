@@ -17,7 +17,7 @@
           <mat-form-field fxFlex>
             <mat-label>Departamento</mat-label>
             <mat-select formControlName="departamentoId">
-              <mat-option *ngFor="let item of listaDepartamento" [value]="item">
+              <mat-option *ngFor="let item of listaDepartamento" [value]="item.id">
 
                 {{item.descricao}}
 
@@ -32,6 +32,26 @@
           <mat-form-field fxFlex>
             <mat-label>Descrição</mat-label>
             <input matInput placeholder="Descrição" formControlName="descricao" required>
+          </mat-form-field>
+
+        </div>
+
+        <div fxLayout="row" fxFlex fxLayoutGap="10px">
+
+          <mat-form-field fxFlex>
+            <mat-label>Preço</mat-label>
+            <input type="number" matInput placeholder="Preço" formControlName="preco" required>
+            <mat-error *ngIf="frmProduto.controls['preco'].hasError('required')">Preço is required</mat-error>
+            <mat-error *ngIf="frmProduto.controls['preco'].hasError('min')">Preço cannot be less than 1 real</mat-error>
+            <mat-error *ngIf="frmProduto.controls['preco'].hasError('max')">Preço cannot be more than 100 reais</mat-error>
+          </mat-form-field>
+
+          <mat-form-field fxFlex>
+            <mat-label>Estoque</mat-label>
+            <input type="number" matInput placeholder="Estoque" formControlName="estoque" required>
+            <mat-error *ngIf="frmProduto.controls['estoque'].hasError('required')">Estoque is required</mat-error>
+            <mat-error *ngIf="frmProduto.controls['estoque'].hasError('min')">Estoque cannot be less than 1</mat-error>
+            <mat-error *ngIf="frmProduto.controls['estoque'].hasError('max')">Estoque cannot be more than 300</mat-error>
           </mat-form-field>
 
         </div>

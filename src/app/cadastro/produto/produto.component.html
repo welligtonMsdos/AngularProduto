@@ -13,21 +13,69 @@
   
           <div style="padding: 10px;">
   
-            <form>
+            <mat-form-field fxFlex>
+
+              <mat-label>Pesquisa</mat-label>
   
-              <mat-form-field fxFlex>
+              <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Pesquisa" autocomplete="off">
   
-                <mat-label>Pesquisa</mat-label>
+              <mat-icon color="primary" matSuffix>search</mat-icon>
   
-                <input matInput (change)="changeFn($event)">
-  
-                <mat-icon color="primary" matSuffix>search</mat-icon>
-  
-              </mat-form-field>
-  
-            </form>
+            </mat-form-field>
   
           </div>  
+
+          <div>
+
+            <table mat-table [dataSource]="dsProduto" class="mat-elevation-z8">
+  
+              <ng-container matColumnDef="descricao">
+                <th mat-header-cell *matHeaderCellDef> Descrição </th>
+                <td mat-cell *matCellDef="let row"> {{row.descricao}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="preco">
+                <th mat-header-cell *matHeaderCellDef> Preço </th>
+                <td mat-cell *matCellDef="let row"> {{row.preco}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="estoque">
+                <th mat-header-cell *matHeaderCellDef> Estoque </th>
+                <td mat-cell *matCellDef="let row"> {{row.estoque}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="departamento">
+                <th mat-header-cell *matHeaderCellDef> Departamento </th>
+                <td mat-cell *matCellDef="let row"> {{row.departamento}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="editar">
+                <th mat-header-cell *matHeaderCellDef width="50px"> Editar </th>
+                <td mat-cell *matCellDef="let row" width="50px">
+                  <button id="editar" role="button" attribute="aria-label" mat-icon-button matTooltip="Editar"
+                    matTooltipClass="tootip-btn" aria-label="Editar">
+                    <mat-icon color="primary" (click)="editar(row.id)">edit</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="excluir">
+                <th mat-header-cell *matHeaderCellDef width="50px"> Excluir </th>
+                <td mat-cell *matCellDef="let row" width="50px">
+                  <button mat-icon-button>
+                    <mat-icon color="warn" (click)="excluir(row.id)">delete</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+  
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  
+            </table>
+  
+          </div>
+  
+          <mat-paginator [pageSizeOptions]="[5,10,20,50]" showFirstLastButtons></mat-paginator>
           
         </mat-card>
   
